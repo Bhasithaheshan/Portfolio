@@ -27,12 +27,6 @@ tailwind.config = {
         dark: '#0A0A0F',
         darker: '#060609',
         surface: '#12121A',
-        gradeA: '#22C55E',
-        gradeB: '#FBBF24',
-        gradeC: '#F97316',
-        textPrimary: '#F8FAFC',
-        textSecondary: '#CBD5E1',
-        textMuted: '#94A3B8',
       }
     }
   }
@@ -74,14 +68,17 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
 .project-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(6,6,9,0.97) 100%); opacity: 0; transition: opacity 0.5s; border-radius: 20px; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
 .project-card-inner:hover .project-overlay { opacity: 1; }
 
-.magnetic-btn { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; color: #F8FAFC; }
+.magnetic-btn { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; color: #F8FAFC; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
 .magnetic-btn .btn-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,245,212,0.1)); border-radius: inherit; z-index: 0; transition: background 0.3s; }
 .magnetic-btn:hover .btn-bg { background: linear-gradient(135deg, rgba(108,92,231,0.3), rgba(0,245,212,0.2)); }
 .magnetic-btn .btn-glow { position: absolute; inset: -1px; border-radius: inherit; background: linear-gradient(135deg, #6C5CE7, #00F5D4); opacity: 0; z-index: -1; transition: opacity 0.4s; filter: blur(8px); }
 .magnetic-btn:hover .btn-glow { opacity: 0.5; }
 .magnetic-btn span { position: relative; z-index: 1; }
 
-.noise-overlay { position: fixed; inset: 0; z-index: 998; pointer-events: none; opacity: 0.03; background-image: url("image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 256px; }
+.btn-education { box-shadow: 0 0 20px rgba(108,92,231,0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.btn-education:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(108,92,231,0.35); }
+
+.noise-overlay { position: fixed; inset: 0; z-index: 998; pointer-events: none; opacity: 0.025; background-image: url("image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 256px; }
 
 .vignette { position: fixed; inset: 0; z-index: 997; pointer-events: none; background: radial-gradient(ellipse at center, transparent 50%, rgba(6,6,9,0.5) 100%); }
 
@@ -98,9 +95,7 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
 .skill-tag:hover { background: rgba(108,92,231,0.25); border-color: rgba(108,92,231,0.5); color: #F8FAFC; transform: translateY(-2px); }
 .footer-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(108,92,231,0.4), rgba(0,245,212,0.4), transparent); }
 
-.grade-a { color: #22C55E; font-weight: 700; }
-.grade-b { color: #FBBF24; font-weight: 700; }
-.grade-c { color: #F97316; font-weight: 700; }
+.text-readable { color: #E5E7EB; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
 
 @media (max-width: 768px) {
   .custom-cursor, .cursor-dot { display: none !important; }
@@ -126,11 +121,11 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
 <!-- Floating Nav -->
 <nav class="nav-float" id="mainNav">
   <div class="flex items-center gap-4 sm:gap-6 text-sm font-semibold">
-    <a href="#hero" class="animated-underline text-slate-300 hover:text-white transition-colors">Home</a>
-    <a href="#education" class="animated-underline text-slate-300 hover:text-white transition-colors">Education</a>
-    <a href="#projects" class="animated-underline text-slate-300 hover:text-white transition-colors">Projects</a>
-    <a href="#skills" class="animated-underline text-slate-300 hover:text-white transition-colors">Skills</a>
-    <a href="#contact" class="animated-underline text-slate-300 hover:text-white transition-colors">Contact</a>
+    <a href="#hero" class="animated-underline text-gray-200 hover:text-white transition-colors">Home</a>
+    <a href="#education" class="animated-underline text-gray-200 hover:text-white transition-colors">Education</a>
+    <a href="#projects" class="animated-underline text-gray-200 hover:text-white transition-colors">Projects</a>
+    <a href="#skills" class="animated-underline text-gray-200 hover:text-white transition-colors">Skills</a>
+    <a href="#contact" class="animated-underline text-gray-200 hover:text-white transition-colors">Contact</a>
   </div>
 </nav>
 
@@ -145,32 +140,37 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
 <section id="hero" class="relative min-h-screen w-full flex flex-col md:flex-row items-stretch overflow-hidden bg-darker">
   
   <!-- Left Side: Text Content -->
-  <div class="relative z-20 w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24 py-16 md:py-0 order-2 md:order-1 hero-content-left">
+  <div class="relative z-20 w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24 py-12 md:py-0 order-2 md:order-1 hero-content-left">
     <!-- Badge -->
-    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/50 w-fit mb-8 opacity-0 translate-y-4" data-anim="left-item">
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/50 w-fit mb-6 opacity-0 translate-y-4" data-anim="left-item">
       <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-      <span class="text-xs font-mono text-slate-200 font-semibold uppercase tracking-wider">Available for work</span>
+      <span class="text-xs font-mono text-gray-200 font-semibold uppercase tracking-wider">Available for work</span>
     </div>
 
     <!-- Name -->
-    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6 opacity-0 translate-y-4 text-white" data-anim="left-item">
+    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[0.95] mb-3 opacity-0 translate-y-4 text-white" data-anim="left-item">
       <span class="block">Bhasitha</span>
       <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Heshan</span>
     </h1>
 
+    <!-- Subtitle -->
+    <p class="font-mono text-base sm:text-lg text-gray-200 mb-4 font-semibold opacity-0 translate-y-4" data-anim="left-item" style="text-shadow: 0 1px 2px rgba(0,0,0,0.4);">
+      Full-Stack Developer | Trader
+    </p>
+
     <!-- Typing Effect -->
-    <div class="font-mono text-lg sm:text-xl text-slate-300 h-8 mb-8 opacity-0 translate-y-4 font-medium" data-anim="left-item">
+    <div class="font-mono text-base sm:text-lg text-gray-200 h-8 mb-6 opacity-0 translate-y-4 font-medium" data-anim="left-item">
       <span id="typingText"></span><span class="typing-cursor"></span>
     </div>
 
     <!-- Short Bio -->
-    <p class="text-slate-300 max-w-md leading-relaxed mb-10 text-base sm:text-lg font-medium opacity-0 translate-y-4" data-anim="left-item">
+    <p class="text-readable max-w-md leading-relaxed mb-8 text-base sm:text-lg font-medium opacity-0 translate-y-4" data-anim="left-item">
       Crafting precision algorithmic trading tools and immersive web experiences. Bridging the gap between quantitative analysis and accessible technology.
     </p>
 
     <!-- CTAs -->
     <div class="flex flex-wrap gap-4 opacity-0 translate-y-4" data-anim="left-item">
-      <a href="#education" class="magnetic-btn group" data-magnetic>
+      <a href="#education" class="magnetic-btn btn-education group" data-magnetic>
         <div class="btn-bg"></div>
         <span class="flex items-center gap-2">Go to Education <i data-lucide="arrow-down-right" class="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></i></span>
       </a>
@@ -188,16 +188,16 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
       <img 
         src="https://raw.githubusercontent.com/Bhasithaheshan/Portfolio/main/portfolio-pic.jpg" 
         alt="Bhasitha Heshan" 
-        class="w-full h-full object-cover hero-img opacity-0 scale-110 md:scale-125"
+        class="w-full h-full object-cover hero-img opacity-0 scale-110 md:scale-125 hero-img-parallax"
         loading="eager"
       />
-      <!-- Gradient Overlay for seamless blend -->
-      <div class="absolute inset-0 bg-gradient-to-t from-darker/90 via-darker/50 to-transparent md:bg-gradient-to-r md:from-darker md:via-darker/80 md:to-transparent pointer-events-none"></div>
+      <!-- Gradient Overlay for seamless blend (darker on left for better text contrast) -->
+      <div class="absolute inset-0 bg-gradient-to-r from-darker/95 via-darker/60 to-transparent md:from-darker md:via-darker/70 md:to-transparent pointer-events-none"></div>
     </div>
   </div>
 
   <!-- Particles Canvas (Subtle) -->
-  <canvas id="particles-canvas" class="absolute inset-0 z-10 opacity-50 pointer-events-none"></canvas>
+  <canvas id="particles-canvas" class="absolute inset-0 z-10 pointer-events-none"></canvas>
 </section>
 
 <!-- ==================== EDUCATION ==================== -->
@@ -209,7 +209,7 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
     <div class="section-reveal" data-section="education-header">
       <div class="flex items-center gap-3 mb-12">
         <div class="w-8 h-[1px] bg-gradient-to-r from-primary to-transparent"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold">Education</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold text-readable">Education</span>
       </div>
     </div>
 
@@ -221,8 +221,8 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <i data-lucide="graduation-cap" class="w-5 h-5 text-primary brightness-125"></i>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-100">Strong O/L</div>
-            <div class="text-xs text-slate-400 font-mono font-medium">A7 B2 Result</div>
+            <div class="text-sm font-semibold text-gray-200 text-readable">Strong O/L</div>
+            <div class="text-xs text-gray-300 font-mono font-medium">A7 B2 Result</div>
           </div>
         </div>
         <div class="glass-card p-5 flex items-center gap-3">
@@ -230,8 +230,8 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <i data-lucide="cpu" class="w-5 h-5 text-accent brightness-125"></i>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-100">Tech Stream</div>
-            <div class="text-xs text-slate-400 font-mono font-medium">Technology Specialization</div>
+            <div class="text-sm font-semibold text-gray-200 text-readable">Tech Stream</div>
+            <div class="text-xs text-gray-300 font-mono font-medium">Technology Specialization</div>
           </div>
         </div>
         <div class="glass-card p-5 flex items-center gap-3">
@@ -239,8 +239,8 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <i data-lucide="bar-chart-3" class="w-5 h-5 text-orange-400 brightness-125"></i>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-100">District Rank</div>
-            <div class="text-xs text-slate-400 font-mono font-medium">125 in A/L</div>
+            <div class="text-sm font-semibold text-gray-200 text-readable">District Rank</div>
+            <div class="text-xs text-gray-300 font-mono font-medium">125 in A/L</div>
           </div>
         </div>
         <div class="glass-card p-5 flex items-center gap-3">
@@ -248,8 +248,8 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <i data-lucide="brain" class="w-5 h-5 text-yellow-400 brightness-125"></i>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-100">Problem Solver</div>
-            <div class="text-xs text-slate-400 font-mono font-medium">Logical Thinking</div>
+            <div class="text-sm font-semibold text-gray-200 text-readable">Problem Solver</div>
+            <div class="text-xs text-gray-300 font-mono font-medium">Logical Thinking</div>
           </div>
         </div>
       </div>
@@ -264,17 +264,17 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <i data-lucide="school" class="w-7 h-7 text-primary brightness-125"></i>
           </div>
           <div class="flex-1">
-            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-1 text-white">Thalakolawewa Maha Vidyalaya</h3>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-1 text-white text-readable">Thalakolawewa Maha Vidyalaya</h3>
             <div class="flex flex-wrap items-center gap-3 mb-3">
-              <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-200 font-semibold">2023 Batch</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-gray-200 font-semibold">2023 Batch</span>
               <span class="px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-mono text-accent font-semibold">O/L</span>
             </div>
             <div class="flex items-center gap-2 mb-4">
-              <span class="text-sm text-slate-300 font-medium">Overall Result:</span>
+              <span class="text-sm text-gray-200 font-medium text-readable">Overall Result:</span>
               <span class="font-display text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">A7 | B2</span>
             </div>
             
-            <button id="olToggleBtn" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors font-mono tracking-wide font-semibold">
+            <button id="olToggleBtn" class="inline-flex items-center gap-2 text-sm text-gray-200 hover:text-white transition-colors font-mono tracking-wide font-semibold">
               <span class="text-xs uppercase">View Full Results</span>
               <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="olToggleIcon"></i>
             </button>
@@ -286,40 +286,40 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
           <div class="pt-6 mt-6 border-t border-slate-800/80">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">📐</span> Mathematics</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">📐</span> Mathematics</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🔬</span> Science</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">🔬</span> Science</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">💻</span> ICT</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">💻</span> ICT</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🇱🇰</span> Sinhala</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">🇱🇰</span> Sinhala</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">📜</span> History</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">📜</span> History</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">☸️</span> Buddhism</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">☸️</span> Buddhism</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">💼</span> Commerce</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">💼</span> Commerce</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🌍</span> English</span>
-                <span class="font-display font-bold grade-b">B</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">🌍</span> English</span>
+                <span class="font-display font-bold text-yellow-400">B</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🎵</span> Music</span>
-                <span class="font-display font-bold grade-b">B</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">🎵</span> Music</span>
+                <span class="font-display font-bold text-yellow-400">B</span>
               </div>
             </div>
           </div>
@@ -336,24 +336,24 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <i data-lucide="building-2" class="w-7 h-7 text-accent brightness-125"></i>
           </div>
           <div class="flex-1">
-            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-1 text-white">Ibbagamuwa Central College</h3>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-1 text-white text-readable">Ibbagamuwa Central College</h3>
             <div class="flex flex-wrap items-center gap-3 mb-3">
-              <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-200 font-semibold">2025 Batch</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-gray-200 font-semibold">2025 Batch</span>
               <span class="px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-mono text-accent font-semibold">A/L</span>
               <span class="px-3 py-1 rounded-full bg-primary/15 border border-primary/25 text-xs font-mono text-primary font-semibold">Technology Stream</span>
             </div>
             <div class="flex flex-wrap items-center gap-4 mb-4">
               <div class="flex items-center gap-2">
-                <span class="text-sm text-slate-300 font-medium">Overall Result:</span>
+                <span class="text-sm text-gray-200 font-medium text-readable">Overall Result:</span>
                 <span class="font-display text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">A C C</span>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-sm text-slate-300 font-medium">District Rank:</span>
+                <span class="text-sm text-gray-200 font-medium text-readable">District Rank:</span>
                 <span class="font-display text-xl font-bold text-orange-400">125</span>
               </div>
             </div>
             
-            <button id="alToggleBtn" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors font-mono tracking-wide font-semibold">
+            <button id="alToggleBtn" class="inline-flex items-center gap-2 text-sm text-gray-200 hover:text-white transition-colors font-mono tracking-wide font-semibold">
               <span class="text-xs uppercase">View Full Results</span>
               <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="alToggleIcon"></i>
             </button>
@@ -365,16 +365,16 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
           <div class="pt-6 mt-6 border-t border-slate-800/80">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">⚙️</span> Engineering Technology</span>
-                <span class="font-display font-bold grade-c">C</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">⚙️</span> Engineering Technology</span>
+                <span class="font-display font-bold text-orange-400">C</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🧪</span> Science for Technology</span>
-                <span class="font-display font-bold grade-a">A</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">🧪</span> Science for Technology</span>
+                <span class="font-display font-bold text-green-400">A</span>
               </div>
               <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
-                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">💻</span> Information Technology</span>
-                <span class="font-display font-bold grade-c">C</span>
+                <span class="text-sm text-gray-200 flex items-center gap-2 font-medium"><span class="text-base">💻</span> Information Technology</span>
+                <span class="font-display font-bold text-orange-400">C</span>
               </div>
             </div>
           </div>
@@ -391,8 +391,8 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
             <span class="text-2xl">🥉</span>
           </div>
           <div>
-            <h4 class="font-display text-lg font-bold text-slate-100 mb-1">Mathematics Olympiad – Provincial Level</h4>
-            <p class="text-sm text-slate-300 font-medium">Achieved <span class="text-yellow-400 font-semibold">4th Place</span> among provincial competitors</p>
+            <h4 class="font-display text-lg font-bold text-gray-200 mb-1 text-readable">Mathematics Olympiad – Provincial Level</h4>
+            <p class="text-sm text-gray-300 font-medium text-readable">Achieved <span class="text-yellow-400 font-semibold">4th Place</span> among provincial competitors</p>
           </div>
         </div>
       </div>
@@ -409,63 +409,60 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
     <div class="section-reveal mb-16" data-section="projects-header">
       <div class="flex items-center gap-3 mb-8">
         <div class="w-8 h-[1px] bg-gradient-to-r from-accent to-transparent"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-accent font-semibold">Projects</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-accent font-semibold text-readable">Projects</span>
       </div>
-      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white">
+      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white text-readable">
         What I've<br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">built</span>
       </h2>
     </div>
     
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectGrid">
-      <!-- Trading Dashboard -->
       <div class="project-card-wrap section-reveal" data-section="project-dashboard">
         <div class="project-card" data-tilt>
           <div class="project-card-inner">
             <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-primary/25 to-accent/15 flex items-center justify-center">
-              <i data-lucide="bar-chart-2" class="w-16 h-16 text-slate-300 brightness-125"></i>
+              <i data-lucide="bar-chart-2" class="w-16 h-16 text-gray-200 brightness-125"></i>
             </div>
             <div class="light-reflection" id="reflection-dash"></div>
             <div class="project-overlay">
               <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-primary/20 text-primary font-semibold rounded">React</span></div>
-              <h3 class="font-display text-xl font-bold mb-2 text-white">Trading Dashboard</h3>
-              <p class="text-slate-300 text-sm mb-4 font-medium">Real-time market analytics dashboard with live WebSocket data feeds and interactive charting.</p>
+              <h3 class="font-display text-xl font-bold mb-2 text-white text-readable">Trading Dashboard</h3>
+              <p class="text-gray-200 text-sm mb-4 font-medium text-readable">Real-time market analytics dashboard with live WebSocket data feeds and interactive charting.</p>
               <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="zap" class="w-3.5 h-3.5 text-accent brightness-125"></i><span class="text-accent font-semibold">Live Data</span></div></div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Portfolio Website -->
       <div class="project-card-wrap section-reveal" data-section="project-portfolio">
         <div class="project-card" data-tilt>
           <div class="project-card-inner">
             <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-accent/25 to-primary/15 flex items-center justify-center">
-              <i data-lucide="layout" class="w-16 h-16 text-slate-300 brightness-125"></i>
+              <i data-lucide="layout" class="w-16 h-16 text-gray-200 brightness-125"></i>
             </div>
             <div class="light-reflection" id="reflection-portfolio"></div>
             <div class="project-overlay">
-              <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-accent/20 text-accent font-semibold rounded">GSAP</span><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-slate-800/80 text-slate-300 font-semibold rounded border border-slate-700/50">Lenis</span></div>
-              <h3 class="font-display text-xl font-bold mb-2 text-white">Portfolio Website</h3>
-              <p class="text-slate-300 text-sm mb-4 font-medium">Immersive portfolio experience with cinematic animations, smooth scrolling, and 3D interactions.</p>
-              <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-primary brightness-125"></i><span class="text-slate-300 font-semibold">Award-Worthy</span></div></div>
+              <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-accent/20 text-accent font-semibold rounded">GSAP</span><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-slate-800/80 text-gray-200 font-semibold rounded border border-slate-700/50">Lenis</span></div>
+              <h3 class="font-display text-xl font-bold mb-2 text-white text-readable">Portfolio Website</h3>
+              <p class="text-gray-200 text-sm mb-4 font-medium text-readable">Immersive portfolio experience with cinematic animations, smooth scrolling, and 3D interactions.</p>
+              <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-primary brightness-125"></i><span class="text-gray-200 font-semibold text-readable">Award-Worthy</span></div></div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Crypto Tracker -->
       <div class="project-card-wrap section-reveal" data-section="project-crypto">
         <div class="project-card" data-tilt>
           <div class="project-card-inner">
             <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-yellow-500/25 to-orange-500/15 flex items-center justify-center">
-              <i data-lucide="coins" class="w-16 h-16 text-slate-300 brightness-125"></i>
+              <i data-lucide="coins" class="w-16 h-16 text-gray-200 brightness-125"></i>
             </div>
             <div class="light-reflection" id="reflection-crypto"></div>
             <div class="project-overlay">
               <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-yellow-500/20 text-yellow-400 font-semibold rounded">Node.js</span></div>
-              <h3 class="font-display text-xl font-bold mb-2 text-white">Crypto Tracker</h3>
-              <p class="text-slate-300 text-sm mb-4 font-medium">Cryptocurrency portfolio tracker with price alerts, market analysis, and real-time notifications.</p>
+              <h3 class="font-display text-xl font-bold mb-2 text-white text-readable">Crypto Tracker</h3>
+              <p class="text-gray-200 text-sm mb-4 font-medium text-readable">Cryptocurrency portfolio tracker with price alerts, market analysis, and real-time notifications.</p>
               <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="bell" class="w-3.5 h-3.5 text-yellow-400 brightness-125"></i><span class="text-yellow-400 font-semibold">Smart Alerts</span></div></div>
             </div>
           </div>
@@ -483,9 +480,9 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
     <div class="section-reveal mb-16" data-section="skills-header">
       <div class="flex items-center gap-3 mb-8">
         <div class="w-8 h-[1px] bg-gradient-to-r from-primary to-transparent"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold">Skills & Tech Stack</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold text-readable">Skills & Tech Stack</span>
       </div>
-      <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight text-white">
+      <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight text-white text-readable">
         Tools I use to<br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">build products</span>
       </h2>
@@ -497,49 +494,49 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
           <div class="w-10 h-10 rounded-lg bg-orange-500/15 border border-orange-500/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <span class="text-xl font-bold text-orange-400">H5</span>
           </div>
-          <div class="text-sm font-semibold text-slate-100">HTML</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">HTML</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-blue-400/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-blue-500/15 border border-blue-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <span class="text-xl font-bold text-blue-400">C3</span>
           </div>
-          <div class="text-sm font-semibold text-slate-100">CSS</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">CSS</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-yellow-400/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-yellow-500/15 border border-yellow-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <span class="text-xl font-bold text-yellow-400">JS</span>
           </div>
-          <div class="text-sm font-semibold text-slate-100">JavaScript</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">JavaScript</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-cyan-400/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <span class="text-xl font-bold text-cyan-400">Re</span>
           </div>
-          <div class="text-sm font-semibold text-slate-100">React</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">React</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-green-500/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <span class="text-xl font-bold text-green-500">No</span>
           </div>
-          <div class="text-sm font-semibold text-slate-100">Node.js</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">Node.js</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-primary/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <i data-lucide="trending-up" class="w-5 h-5 text-primary brightness-125"></i>
           </div>
-          <div class="text-sm font-semibold text-slate-100">Trading</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">Trading</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-purple-400/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-purple-500/15 border border-purple-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <i data-lucide="file-code" class="w-5 h-5 text-purple-400 brightness-125"></i>
           </div>
-          <div class="text-sm font-semibold text-slate-100">Pine Script</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">Pine Script</div>
         </div>
         <div class="glass-card p-5 text-center group hover:border-accent/40 transition-all duration-300 cursor-default">
           <div class="w-10 h-10 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
             <i data-lucide="wind" class="w-5 h-5 text-accent brightness-125"></i>
           </div>
-          <div class="text-sm font-semibold text-slate-100">Tailwind</div>
+          <div class="text-sm font-semibold text-gray-200 text-readable">Tailwind</div>
         </div>
       </div>
     </div>
@@ -555,16 +552,16 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
     <div class="section-reveal" data-section="contact">
       <div class="flex items-center justify-center gap-3 mb-8">
         <div class="w-8 h-[1px] bg-gradient-to-r from-transparent to-primary"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold">Get In Touch</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold text-readable">Get In Touch</span>
         <div class="w-8 h-[1px] bg-gradient-to-l from-transparent to-primary"></div>
       </div>
       
-      <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
+      <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-white text-readable">
         Let's build<br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">something extraordinary</span>
       </h2>
       
-      <p class="text-slate-300 text-base sm:text-lg mb-12 max-w-xl mx-auto leading-relaxed font-medium">
+      <p class="text-readable text-base sm:text-lg mb-12 max-w-xl mx-auto leading-relaxed font-medium">
         Whether you need a custom trading indicator, a full-stack web application, or want to collaborate — I'm ready.
       </p>
       
@@ -574,7 +571,7 @@ body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; ov
         <a href="https://t.me/bhasithaheshan" target="_blank" class="magnetic-btn group" data-magnetic><div class="btn-glow"></div><div class="btn-bg"></div><span class="flex items-center gap-2"><i data-lucide="send" class="w-5 h-5"></i> Telegram</span></a>
       </div>
       
-      <div class="mt-16 pt-8"><div class="footer-line mb-8"></div><p class="text-slate-500 text-xs font-mono tracking-wider font-medium">© 2024 Bhasitha Heshan — Crafted with precision</p></div>
+      <div class="mt-16 pt-8"><div class="footer-line mb-8"></div><p class="text-gray-400 text-xs font-mono tracking-wider font-medium">© 2024 Bhasitha Heshan — Crafted with precision</p></div>
     </div>
   </div>
 </section>
@@ -630,20 +627,37 @@ function initSite() {
     el.addEventListener('mouseleave', () => cursor.classList.remove('glow'));
   });
 
-  // Particles
+  // Particles - Subtle floating dots
   const canvas = document.getElementById('particles-canvas'), ctx = canvas.getContext('2d');
-  let particles = [], pCount = window.innerWidth < 768 ? 30 : 60;
+  let particles = [], pCount = window.innerWidth < 768 ? 25 : 50;
   function resizeCanvas() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; }
   resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-  class P { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.s = Math.random() * 1.5 + 0.5; this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3; } update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2); ctx.fillStyle = 'rgba(108,92,231,0.4)'; ctx.fill(); } }
+  class P { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.s = Math.random() * 1.5 + 0.3; this.vx = (Math.random() - 0.5) * 0.15; this.vy = (Math.random() - 0.5) * 0.15; this.opacity = Math.random() * 0.15 + 0.05; } update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2); ctx.fillStyle = 'rgba(108,92,231,' + this.opacity + ')'; ctx.fill(); } }
   for(let i=0; i<pCount; i++) particles.push(new P());
   function animateParticles() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
   animateParticles();
 
   // HERO ANIMATIONS
   const heroTL = gsap.timeline({ delay: 0.2 });
-  heroTL.to('[data-anim="left-item"]', { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' });
-  heroTL.to('.hero-img', { opacity: 1, scale: 1, duration: 1.5, ease: 'power2.out', delay: -0.5 });
+  heroTL.to('[data-anim="left-item"]', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+  heroTL.to('.hero-img', { opacity: 1, scale: 1.05, duration: 1.5, ease: 'power2.out', delay: -0.5 });
+
+  // Subtitle fade-in (already handled above)
+  
+  // Hero image parallax on scroll (very slow)
+  const heroImg = document.querySelector('.hero-img-parallax');
+  if (heroImg) {
+    gsap.to(heroImg, {
+      y: -80,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 2
+      }
+    });
+  }
 
   // Typing Effect
   const roles = ['Full-stack Developer', 'Algorithmic Trader', 'Pine Script Expert'];
@@ -654,7 +668,7 @@ function initSite() {
     if (!isDeleting && charIndex === curr.length + 1) { isDeleting = true; delay = 2000; }
     else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; delay = 500; }
     setTimeout(typeEffect, delay);
-  } setTimeout(typeEffect, 1800);
+  } setTimeout(typeEffect, 2200);
 
   // Scroll Progress
   const progressBar = document.getElementById('progress-bar');
@@ -704,7 +718,7 @@ function initSite() {
 }
 
 if (window.matchMedia("(min-width: 768px)").matches) {
-  gsap.set('.hero-img', { scale: 1.15 });
+  gsap.set('.hero-img', { scale: 1.05 });
 }
 </script>
 </body>
