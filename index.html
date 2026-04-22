@@ -27,7 +27,12 @@ tailwind.config = {
         dark: '#0A0A0F',
         darker: '#060609',
         surface: '#12121A',
-        glass: 'rgba(255,255,255,0.03)',
+        gradeA: '#22C55E',
+        gradeB: '#FBBF24',
+        gradeC: '#F97316',
+        textPrimary: '#F8FAFC',
+        textSecondary: '#CBD5E1',
+        textMuted: '#94A3B8',
       }
     }
   }
@@ -36,90 +41,79 @@ tailwind.config = {
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { overflow-x: hidden; }
-body { background: #060609; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; cursor: none; }
+body { background: #060609; color: #F8FAFC; font-family: 'Inter', sans-serif; overflow-x: hidden; cursor: none; }
 ::-webkit-scrollbar { display: none; }
 
 #loader { position: fixed; inset: 0; z-index: 1000; background: #060609; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .loader-percent { font-family: 'Space Grotesk', sans-serif; font-size: clamp(4rem, 15vw, 12rem); font-weight: 800; background: linear-gradient(135deg, #6C5CE7, #00F5D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .loader-bar-track { width: min(400px, 80vw); height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-top: 2rem; }
-.loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6C5CE7, #00F5D4); border-radius: 2px; transition: none; }
-.loader-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-top: 1rem; letter-spacing: 0.3em; text-transform: uppercase; }
+.loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6C5CE7, #00F5D4); border-radius: 2px; }
+.loader-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #94A3B8; margin-top: 1rem; letter-spacing: 0.3em; text-transform: uppercase; }
 
 #progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, #6C5CE7, #00F5D4); z-index: 999; width: 0%; }
 
-.custom-cursor { position: fixed; width: 20px; height: 20px; border: 1.5px solid rgba(108,92,231,0.6); border-radius: 50%; pointer-events: none; z-index: 9999; transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.15s ease-out; mix-blend-mode: difference; }
-.custom-cursor.glow { width: 50px; height: 50px; border-color: rgba(0,245,212,0.4); background: radial-gradient(circle, rgba(108,92,231,0.15), transparent 70%); }
+.custom-cursor { position: fixed; width: 20px; height: 20px; border: 1.5px solid rgba(108,92,231,0.8); border-radius: 50%; pointer-events: none; z-index: 9999; transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.15s ease-out; mix-blend-mode: difference; }
+.custom-cursor.glow { width: 50px; height: 50px; border-color: rgba(0,245,212,0.6); background: radial-gradient(circle, rgba(108,92,231,0.25), transparent 70%); }
 .cursor-dot { position: fixed; width: 5px; height: 5px; background: #00F5D4; border-radius: 50%; pointer-events: none; z-index: 10000; }
 
-#particles-canvas { position: absolute; inset: 0; z-index: 0; }
-
-.char-wrap { display: inline-block; overflow: hidden; }
-.char-inner { display: inline-block; }
+#particles-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 
 .typing-cursor { display: inline-block; width: 2px; height: 1.2em; background: #00F5D4; margin-left: 4px; animation: blink 0.8s infinite; vertical-align: text-bottom; }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
-.glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; }
+.glass-card { background: rgba(10,10,18,0.7); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; }
 
 .project-card-wrap { perspective: 1200px; }
 .project-card { transform-style: preserve-3d; will-change: transform; transition: transform 0.15s ease-out; }
-.project-card-inner { position: relative; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); transition: border-color 0.4s, box-shadow 0.4s; }
-.project-card-inner:hover { border-color: rgba(108,92,231,0.3); box-shadow: 0 20px 60px rgba(108,92,231,0.15), 0 0 80px rgba(108,92,231,0.05); }
+.project-card-inner { position: relative; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(10,10,18,0.6); transition: border-color 0.4s, box-shadow 0.4s; }
+.project-card-inner:hover { border-color: rgba(108,92,231,0.4); box-shadow: 0 20px 60px rgba(108,92,231,0.15), 0 0 80px rgba(108,92,231,0.08); }
 
 .light-reflection { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s; border-radius: 20px; }
 .project-card-inner:hover .light-reflection { opacity: 1; }
 
-.project-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(6,6,9,0.95) 100%); opacity: 0; transition: opacity 0.5s; border-radius: 20px; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
+.project-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(6,6,9,0.97) 100%); opacity: 0; transition: opacity 0.5s; border-radius: 20px; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
 .project-card-inner:hover .project-overlay { opacity: 1; }
 
-.scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-.scroll-line { width: 1px; height: 60px; background: linear-gradient(180deg, #00F5D4, transparent); animation: scrollPulse 2s infinite; }
-@keyframes scrollPulse { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform:scaleY(1);transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
-
-.magnetic-btn { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 50px; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em; transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; }
+.magnetic-btn { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; color: #F8FAFC; }
 .magnetic-btn .btn-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,245,212,0.1)); border-radius: inherit; z-index: 0; transition: background 0.3s; }
 .magnetic-btn:hover .btn-bg { background: linear-gradient(135deg, rgba(108,92,231,0.3), rgba(0,245,212,0.2)); }
 .magnetic-btn .btn-glow { position: absolute; inset: -1px; border-radius: inherit; background: linear-gradient(135deg, #6C5CE7, #00F5D4); opacity: 0; z-index: -1; transition: opacity 0.4s; filter: blur(8px); }
 .magnetic-btn:hover .btn-glow { opacity: 0.5; }
 .magnetic-btn span { position: relative; z-index: 1; }
 
-.noise-overlay { position: fixed; inset: 0; z-index: 998; pointer-events: none; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 256px; }
+.noise-overlay { position: fixed; inset: 0; z-index: 998; pointer-events: none; opacity: 0.03; background-image: url("image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 256px; }
 
-.vignette { position: fixed; inset: 0; z-index: 997; pointer-events: none; background: radial-gradient(ellipse at center, transparent 50%, rgba(6,6,9,0.6) 100%); }
+.vignette { position: fixed; inset: 0; z-index: 997; pointer-events: none; background: radial-gradient(ellipse at center, transparent 50%, rgba(6,6,9,0.5) 100%); }
 
 .animated-underline { position: relative; }
-.animated-underline::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: linear-gradient(90deg, #6C5CE7, #00F5D4); transition: width 0.4s ease; }
+.animated-underline::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1.5px; background: linear-gradient(90deg, #6C5CE7, #00F5D4); transition: width 0.4s ease; }
 .animated-underline:hover::after { width: 100%; }
 
 .stat-number { font-variant-numeric: tabular-nums; }
-
 .section-reveal { opacity: 0; transform: translateY(60px) scale(0.97); }
+.grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(108,92,231,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(108,92,231,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%); }
+.glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0.6; }
+.nav-float { position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 100; padding: 0.6rem 1.5rem; border-radius: 50px; background: rgba(6,6,9,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); opacity: 0; }
+.skill-tag { padding: 0.4rem 1rem; border-radius: 50px; background: rgba(108,92,231,0.15); border: 1px solid rgba(108,92,231,0.2); font-size: 0.8rem; font-weight: 600; color: #CBD5E1; transition: all 0.3s; }
+.skill-tag:hover { background: rgba(108,92,231,0.25); border-color: rgba(108,92,231,0.5); color: #F8FAFC; transform: translateY(-2px); }
+.footer-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(108,92,231,0.4), rgba(0,245,212,0.4), transparent); }
 
-.hero-parallax { will-change: transform; }
-
-.grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(108,92,231,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(108,92,231,0.03) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%); }
-
-.glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
-
-.nav-float { position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 100; padding: 0.6rem 1.5rem; border-radius: 50px; background: rgba(10,10,15,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06); opacity: 0; }
-
-.skill-tag { padding: 0.4rem 1rem; border-radius: 50px; background: rgba(108,92,231,0.1); border: 1px solid rgba(108,92,231,0.15); font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,0.7); transition: all 0.3s; }
-.skill-tag:hover { background: rgba(108,92,231,0.2); border-color: rgba(108,92,231,0.4); color: #fff; transform: translateY(-2px); }
-
-.footer-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(108,92,231,0.3), rgba(0,245,212,0.3), transparent); }
+.grade-a { color: #22C55E; font-weight: 700; }
+.grade-b { color: #FBBF24; font-weight: 700; }
+.grade-c { color: #F97316; font-weight: 700; }
 
 @media (max-width: 768px) {
   .custom-cursor, .cursor-dot { display: none !important; }
   body { cursor: auto; }
   .project-overlay { opacity: 1; }
+  .hero-img { object-position: center 20%; }
 }
 </style>
 </head>
 <body>
 
-<!-- Noise Overlay -->
+<!-- Noise & Vignette -->
 <div class="noise-overlay"></div>
-<!-- Vignette -->
 <div class="vignette"></div>
 
 <!-- Custom Cursor -->
@@ -131,110 +125,274 @@ body { background: #060609; color: #fff; font-family: 'Inter', sans-serif; overf
 
 <!-- Floating Nav -->
 <nav class="nav-float" id="mainNav">
-  <div class="flex items-center gap-6 text-sm font-medium">
-    <a href="#hero" class="animated-underline text-white/60 hover:text-white transition-colors">Home</a>
-    <a href="#about" class="animated-underline text-white/60 hover:text-white transition-colors">About</a>
-    <a href="#projects" class="animated-underline text-white/60 hover:text-white transition-colors">Projects</a>
-    <a href="#contact" class="animated-underline text-white/60 hover:text-white transition-colors">Contact</a>
+  <div class="flex items-center gap-4 sm:gap-6 text-sm font-semibold">
+    <a href="#hero" class="animated-underline text-slate-300 hover:text-white transition-colors">Home</a>
+    <a href="#education" class="animated-underline text-slate-300 hover:text-white transition-colors">Education</a>
+    <a href="#projects" class="animated-underline text-slate-300 hover:text-white transition-colors">Projects</a>
+    <a href="#skills" class="animated-underline text-slate-300 hover:text-white transition-colors">Skills</a>
+    <a href="#contact" class="animated-underline text-slate-300 hover:text-white transition-colors">Contact</a>
   </div>
 </nav>
 
 <!-- ==================== LOADER ==================== -->
 <div id="loader">
   <div class="loader-percent" id="loaderPercent">0</div>
-  <div class="loader-bar-track">
-    <div class="loader-bar-fill" id="loaderBarFill"></div>
-  </div>
+  <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderBarFill"></div></div>
   <div class="loader-subtitle">initializing experience</div>
 </div>
 
-<!-- ==================== HERO ==================== -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <canvas id="particles-canvas"></canvas>
-  <div class="grid-bg"></div>
+<!-- ==================== HERO (SPLIT LAYOUT) ==================== -->
+<section id="hero" class="relative min-h-screen w-full flex flex-col md:flex-row items-stretch overflow-hidden bg-darker">
   
-  <!-- Glow Orbs -->
-  <div class="glow-orb w-96 h-96 bg-primary/20 -top-48 -left-48" style="animation: float1 12s ease-in-out infinite;"></div>
-  <div class="glow-orb w-80 h-80 bg-accent/10 bottom-0 right-0" style="animation: float2 15s ease-in-out infinite;"></div>
-  
-  <div class="hero-parallax relative z-10 text-center px-4" data-speed="0.03">
-    <div class="mb-4 flex items-center justify-center gap-2 text-xs font-mono tracking-widest uppercase text-white/30">
-      <span class="w-2 h-2 rounded-full bg-accent/60 animate-pulse"></span>
-      Available for opportunities
+  <!-- Left Side: Text Content -->
+  <div class="relative z-20 w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24 py-16 md:py-0 order-2 md:order-1 hero-content-left">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/50 w-fit mb-8 opacity-0 translate-y-4" data-anim="left-item">
+      <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+      <span class="text-xs font-mono text-slate-200 font-semibold uppercase tracking-wider">Available for work</span>
     </div>
-    
-    <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none mb-6" id="heroTitle">
-      <span class="char-wrap"><span class="char-inner">B</span></span><span class="char-wrap"><span class="char-inner">h</span></span><span class="char-wrap"><span class="char-inner">a</span></span><span class="char-wrap"><span class="char-inner">s</span></span><span class="char-wrap"><span class="char-inner">i</span></span><span class="char-wrap"><span class="char-inner">t</span></span><span class="char-wrap"><span class="char-inner">h</span></span><span class="char-wrap"><span class="char-inner">a</span></span>
-      <br>
-      <span class="char-wrap"><span class="char-inner">H</span></span><span class="char-wrap"><span class="char-inner">e</span></span><span class="char-wrap"><span class="char-inner">s</span></span><span class="char-wrap"><span class="char-inner">h</span></span><span class="char-wrap"><span class="char-inner">a</span></span><span class="char-wrap"><span class="char-inner">n</span></span>
+
+    <!-- Name -->
+    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6 opacity-0 translate-y-4 text-white" data-anim="left-item">
+      <span class="block">Bhasitha</span>
+      <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Heshan</span>
     </h1>
-    
-    <div class="font-mono text-lg sm:text-xl text-white/40 h-8 flex items-center justify-center">
+
+    <!-- Typing Effect -->
+    <div class="font-mono text-lg sm:text-xl text-slate-300 h-8 mb-8 opacity-0 translate-y-4 font-medium" data-anim="left-item">
       <span id="typingText"></span><span class="typing-cursor"></span>
     </div>
-    
-    <div class="scroll-indicator mt-12">
-      <span class="text-xs font-mono text-white/20 tracking-widest uppercase">Scroll to explore</span>
-      <div class="scroll-line"></div>
+
+    <!-- Short Bio -->
+    <p class="text-slate-300 max-w-md leading-relaxed mb-10 text-base sm:text-lg font-medium opacity-0 translate-y-4" data-anim="left-item">
+      Crafting precision algorithmic trading tools and immersive web experiences. Bridging the gap between quantitative analysis and accessible technology.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap gap-4 opacity-0 translate-y-4" data-anim="left-item">
+      <a href="#education" class="magnetic-btn group" data-magnetic>
+        <div class="btn-bg"></div>
+        <span class="flex items-center gap-2">Go to Education <i data-lucide="arrow-down-right" class="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></i></span>
+      </a>
+      <a href="#projects" class="magnetic-btn group bg-gradient-to-r from-primary to-accent text-white" data-magnetic>
+        <div class="btn-glow"></div>
+        <div class="btn-bg bg-white/10"></div>
+        <span class="flex items-center gap-2">View Projects <i data-lucide="message-square" class="w-4 h-4"></i></span>
+      </a>
     </div>
   </div>
+
+  <!-- Right Side: Image -->
+  <div class="w-full md:w-1/2 h-[50vh] md:h-screen relative overflow-hidden order-1 md:order-2 hero-image-wrapper">
+    <div class="absolute inset-0 md:w-[85%] md:left-auto md:right-0 w-full h-full">
+      <img 
+        src="https://raw.githubusercontent.com/Bhasithaheshan/Portfolio/main/portfolio-pic.jpg" 
+        alt="Bhasitha Heshan" 
+        class="w-full h-full object-cover hero-img opacity-0 scale-110 md:scale-125"
+        loading="eager"
+      />
+      <!-- Gradient Overlay for seamless blend -->
+      <div class="absolute inset-0 bg-gradient-to-t from-darker/90 via-darker/50 to-transparent md:bg-gradient-to-r md:from-darker md:via-darker/80 md:to-transparent pointer-events-none"></div>
+    </div>
+  </div>
+
+  <!-- Particles Canvas (Subtle) -->
+  <canvas id="particles-canvas" class="absolute inset-0 z-10 opacity-50 pointer-events-none"></canvas>
 </section>
 
-<!-- ==================== ABOUT ==================== -->
-<section id="about" class="relative min-h-screen flex items-center justify-center py-32 px-4">
-  <div class="glow-orb w-72 h-72 bg-primary/10 top-20 left-1/4"></div>
+<!-- ==================== EDUCATION ==================== -->
+<section id="education" class="relative py-32 px-4">
+  <div class="glow-orb w-96 h-96 bg-primary/15 top-20 left-0"></div>
+  <div class="glow-orb w-80 h-80 bg-accent/15 bottom-20 right-0"></div>
   
-  <div class="max-w-5xl mx-auto w-full">
-    <div class="section-reveal" data-section="about">
-      <div class="flex items-center gap-3 mb-8">
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="section-reveal" data-section="education-header">
+      <div class="flex items-center gap-3 mb-12">
         <div class="w-8 h-[1px] bg-gradient-to-r from-primary to-transparent"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-primary/70">About Me</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold">Education</span>
       </div>
-      
-      <div class="glass-card p-8 sm:p-12 relative overflow-hidden group">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-        
-        <div class="relative grid md:grid-cols-2 gap-12 items-center">
+    </div>
+
+    <!-- Quick Summary -->
+    <div class="section-reveal" data-section="education-summary">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div class="glass-card p-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="graduation-cap" class="w-5 h-5 text-primary brightness-125"></i>
+          </div>
           <div>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold mb-6 leading-tight">
-              Building the future of <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">algorithmic trading</span>
-            </h2>
-            <p class="text-white/50 leading-relaxed mb-6 text-sm sm:text-base">
-              I'm Bhasitha Heshan — a full-stack developer and algorithmic trading specialist based in Sri Lanka. I engineer precision trading systems using Pine Script, advanced technical analysis, and full-stack web technologies. My work bridges the gap between quantitative analysis and accessible trading tools.
-            </p>
-            <p class="text-white/30 text-sm leading-relaxed">
-              With a deep understanding of market microstructure and order flow dynamics, I create tools that give traders an institutional-grade edge. Every indicator, every algorithm is crafted with obsessive attention to detail.
-            </p>
+            <div class="text-sm font-semibold text-slate-100">Strong O/L</div>
+            <div class="text-xs text-slate-400 font-mono font-medium">A7 B2 Result</div>
+          </div>
+        </div>
+        <div class="glass-card p-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="cpu" class="w-5 h-5 text-accent brightness-125"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-slate-100">Tech Stream</div>
+            <div class="text-xs text-slate-400 font-mono font-medium">Technology Specialization</div>
+          </div>
+        </div>
+        <div class="glass-card p-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="bar-chart-3" class="w-5 h-5 text-orange-400 brightness-125"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-slate-100">District Rank</div>
+            <div class="text-xs text-slate-400 font-mono font-medium">125 in A/L</div>
+          </div>
+        </div>
+        <div class="glass-card p-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="brain" class="w-5 h-5 text-yellow-400 brightness-125"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-slate-100">Problem Solver</div>
+            <div class="text-xs text-slate-400 font-mono font-medium">Logical Thinking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- O/L Section -->
+    <div class="section-reveal" data-section="education-ol">
+      <div class="glass-card p-8 sm:p-10 mb-8 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div class="relative flex flex-col md:flex-row gap-8 items-start md:items-center">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/25 to-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="school" class="w-7 h-7 text-primary brightness-125"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-1 text-white">Thalakolawewa Maha Vidyalaya</h3>
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-200 font-semibold">2023 Batch</span>
+              <span class="px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-mono text-accent font-semibold">O/L</span>
+            </div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="text-sm text-slate-300 font-medium">Overall Result:</span>
+              <span class="font-display text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">A7 | B2</span>
+            </div>
             
-            <div class="flex flex-wrap gap-2 mt-6">
-              <span class="skill-tag">Pine Script</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">TypeScript</span>
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">Node.js</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">WebSocket</span>
-              <span class="skill-tag">TradingView API</span>
+            <button id="olToggleBtn" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors font-mono tracking-wide font-semibold">
+              <span class="text-xs uppercase">View Full Results</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="olToggleIcon"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Expandable Results -->
+        <div id="olResults" class="overflow-hidden hidden">
+          <div class="pt-6 mt-6 border-t border-slate-800/80">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">📐</span> Mathematics</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🔬</span> Science</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">💻</span> ICT</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🇱🇰</span> Sinhala</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">📜</span> History</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">☸️</span> Buddhism</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">💼</span> Commerce</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🌍</span> English</span>
+                <span class="font-display font-bold grade-b">B</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🎵</span> Music</span>
+                <span class="font-display font-bold grade-b">B</span>
+              </div>
             </div>
           </div>
-          
-          <div class="grid grid-cols-2 gap-4">
-            <div class="glass-card p-6 text-center group/stat">
-              <div class="text-3xl sm:text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent stat-number" data-target="50">0</div>
-              <div class="text-xs text-white/40 mt-2 font-mono uppercase tracking-wider">Projects</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A/L Section -->
+    <div class="section-reveal" data-section="education-al">
+      <div class="glass-card p-8 sm:p-10 mb-8 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-accent/8 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div class="relative flex flex-col md:flex-row gap-8 items-start md:items-center">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/25 to-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="building-2" class="w-7 h-7 text-accent brightness-125"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-1 text-white">Ibbagamuwa Central College</h3>
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-200 font-semibold">2025 Batch</span>
+              <span class="px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-mono text-accent font-semibold">A/L</span>
+              <span class="px-3 py-1 rounded-full bg-primary/15 border border-primary/25 text-xs font-mono text-primary font-semibold">Technology Stream</span>
             </div>
-            <div class="glass-card p-6 text-center group/stat">
-              <div class="text-3xl sm:text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary stat-number" data-target="57">0</div>
-              <div class="text-xs text-white/40 mt-2 font-mono uppercase tracking-wider">Win Rate %</div>
+            <div class="flex flex-wrap items-center gap-4 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-slate-300 font-medium">Overall Result:</span>
+                <span class="font-display text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">A C C</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-slate-300 font-medium">District Rank:</span>
+                <span class="font-display text-xl font-bold text-orange-400">125</span>
+              </div>
             </div>
-            <div class="glass-card p-6 text-center group/stat">
-              <div class="text-3xl sm:text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent stat-number" data-target="4">0</div>
-              <div class="text-xs text-white/40 mt-2 font-mono uppercase tracking-wider">Years Exp.</div>
+            
+            <button id="alToggleBtn" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors font-mono tracking-wide font-semibold">
+              <span class="text-xs uppercase">View Full Results</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="alToggleIcon"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Expandable Results -->
+        <div id="alResults" class="overflow-hidden hidden">
+          <div class="pt-6 mt-6 border-t border-slate-800/80">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">⚙️</span> Engineering Technology</span>
+                <span class="font-display font-bold grade-c">C</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">🧪</span> Science for Technology</span>
+                <span class="font-display font-bold grade-a">A</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800/60">
+                <span class="text-sm text-slate-200 flex items-center gap-2 font-medium"><span class="text-base">💻</span> Information Technology</span>
+                <span class="font-display font-bold grade-c">C</span>
+              </div>
             </div>
-            <div class="glass-card p-6 text-center group/stat">
-              <div class="text-3xl sm:text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary stat-number" data-target="12000">0</div>
-              <div class="text-xs text-white/40 mt-2 font-mono uppercase tracking-wider">Trades Analyzed</div>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievement -->
+    <div class="section-reveal" data-section="achievement">
+      <div class="glass-card p-6 sm:p-8 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/8 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div class="relative flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center flex-shrink-0">
+            <span class="text-2xl">🥉</span>
+          </div>
+          <div>
+            <h4 class="font-display text-lg font-bold text-slate-100 mb-1">Mathematics Olympiad – Provincial Level</h4>
+            <p class="text-sm text-slate-300 font-medium">Achieved <span class="text-yellow-400 font-semibold">4th Place</span> among provincial competitors</p>
           </div>
         </div>
       </div>
@@ -245,107 +403,143 @@ body { background: #060609; color: #fff; font-family: 'Inter', sans-serif; overf
 <!-- ==================== PROJECTS ==================== -->
 <section id="projects" class="relative py-32 px-4">
   <div class="grid-bg"></div>
+  <div class="glow-orb w-72 h-72 bg-accent/15 top-40 right-20"></div>
   
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="section-reveal mb-16" data-section="projects-header">
       <div class="flex items-center gap-3 mb-8">
         <div class="w-8 h-[1px] bg-gradient-to-r from-accent to-transparent"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-accent/70">Featured Work</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-accent font-semibold">Projects</span>
       </div>
-      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-        Precision tools for<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">modern traders</span>
+      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white">
+        What I've<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">built</span>
       </h2>
     </div>
     
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectGrid">
-      <!-- Project 1 -->
-      <div class="project-card-wrap section-reveal" data-section="project-1">
+      <!-- Trading Dashboard -->
+      <div class="project-card-wrap section-reveal" data-section="project-dashboard">
         <div class="project-card" data-tilt>
           <div class="project-card-inner">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img src="https://image.qwenlm.ai/public_source/ed0a4594-4bb4-425e-bd32-5597a24a7f49/10dce174c-3f26-44ea-9ed3-aab14ec40962.png" alt="Liquidity Sweep Pro" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+            <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-primary/25 to-accent/15 flex items-center justify-center">
+              <i data-lucide="bar-chart-2" class="w-16 h-16 text-slate-300 brightness-125"></i>
             </div>
-            <div class="light-reflection" id="reflection1"></div>
+            <div class="light-reflection" id="reflection-dash"></div>
             <div class="project-overlay">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-primary/20 text-primary/80 rounded">TradingView</span>
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-accent/20 text-accent/80 rounded">Pine Script</span>
-              </div>
-              <h3 class="font-display text-xl font-bold mb-2">Liquidity Sweep Pro</h3>
-              <p class="text-white/50 text-sm mb-4">Advanced liquidity sweep detection with institutional-grade order flow analysis. Identifies sweep events with 95% accuracy.</p>
-              <div class="flex items-center gap-4 text-xs font-mono">
-                <div class="flex items-center gap-1">
-                  <i data-lucide="trending-up" class="w-3.5 h-3.5 text-accent"></i>
-                  <span class="text-accent">57% Win Rate</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <i data-lucide="activity" class="w-3.5 h-3.5 text-primary"></i>
-                  <span class="text-white/40">Real-time Analytics</span>
-                </div>
-              </div>
+              <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-primary/20 text-primary font-semibold rounded">React</span></div>
+              <h3 class="font-display text-xl font-bold mb-2 text-white">Trading Dashboard</h3>
+              <p class="text-slate-300 text-sm mb-4 font-medium">Real-time market analytics dashboard with live WebSocket data feeds and interactive charting.</p>
+              <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="zap" class="w-3.5 h-3.5 text-accent brightness-125"></i><span class="text-accent font-semibold">Live Data</span></div></div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Project 2 -->
-      <div class="project-card-wrap section-reveal" data-section="project-2">
+      <!-- Portfolio Website -->
+      <div class="project-card-wrap section-reveal" data-section="project-portfolio">
         <div class="project-card" data-tilt>
           <div class="project-card-inner">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img src="https://image.qwenlm.ai/public_source/ed0a4594-4bb4-425e-bd32-5597a24a7f49/19a1162f7-f135-4f33-a970-fbd431410cff.png" alt="OrderFlow Master" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+            <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-accent/25 to-primary/15 flex items-center justify-center">
+              <i data-lucide="layout" class="w-16 h-16 text-slate-300 brightness-125"></i>
             </div>
-            <div class="light-reflection" id="reflection2"></div>
+            <div class="light-reflection" id="reflection-portfolio"></div>
             <div class="project-overlay">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-orange-500/20 text-orange-400 rounded">Order Flow</span>
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-accent/20 text-accent/80 rounded">Pine Script</span>
-              </div>
-              <h3 class="font-display text-xl font-bold mb-2">OrderFlow Master</h3>
-              <p class="text-white/50 text-sm mb-4">Comprehensive order flow analysis suite with volume profile, delta visualization, and footprint chart integration.</p>
-              <div class="flex items-center gap-4 text-xs font-mono">
-                <div class="flex items-center gap-1">
-                  <i data-lucide="bar-chart-3" class="w-3.5 h-3.5 text-orange-400"></i>
-                  <span class="text-orange-400">Volume Profile</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <i data-lucide="zap" class="w-3.5 h-3.5 text-primary"></i>
-                  <span class="text-white/40">Delta Analysis</span>
-                </div>
-              </div>
+              <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-accent/20 text-accent font-semibold rounded">GSAP</span><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-slate-800/80 text-slate-300 font-semibold rounded border border-slate-700/50">Lenis</span></div>
+              <h3 class="font-display text-xl font-bold mb-2 text-white">Portfolio Website</h3>
+              <p class="text-slate-300 text-sm mb-4 font-medium">Immersive portfolio experience with cinematic animations, smooth scrolling, and 3D interactions.</p>
+              <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-primary brightness-125"></i><span class="text-slate-300 font-semibold">Award-Worthy</span></div></div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Project 3 -->
-      <div class="project-card-wrap section-reveal" data-section="project-3">
+      <!-- Crypto Tracker -->
+      <div class="project-card-wrap section-reveal" data-section="project-crypto">
         <div class="project-card" data-tilt>
           <div class="project-card-inner">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img src="https://image.qwenlm.ai/public_source/ed0a4594-4bb4-425e-bd32-5597a24a7f49/128efea67-1298-4713-a7f6-a68e0531f937.png" alt="Sniper Entry V.02" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+            <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-yellow-500/25 to-orange-500/15 flex items-center justify-center">
+              <i data-lucide="coins" class="w-16 h-16 text-slate-300 brightness-125"></i>
             </div>
-            <div class="light-reflection" id="reflection3"></div>
+            <div class="light-reflection" id="reflection-crypto"></div>
             <div class="project-overlay">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-yellow-500/20 text-yellow-400 rounded">Signals</span>
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-accent/20 text-accent/80 rounded">Pine Script</span>
-              </div>
-              <h3 class="font-display text-xl font-bold mb-2">Sniper Entry V.02</h3>
-              <p class="text-white/50 text-sm mb-4">Precision entry signal generator using multi-timeframe confluence, RSI divergence, and volume spike confirmation.</p>
-              <div class="flex items-center gap-4 text-xs font-mono">
-                <div class="flex items-center gap-1">
-                  <i data-lucide="crosshair" class="w-3.5 h-3.5 text-yellow-400"></i>
-                  <span class="text-yellow-400">68.2% Win Rate</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <i data-lucide="clock" class="w-3.5 h-3.5 text-accent"></i>
-                  <span class="text-white/40">4m 23s Avg Hold</span>
-                </div>
-              </div>
+              <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-yellow-500/20 text-yellow-400 font-semibold rounded">Node.js</span></div>
+              <h3 class="font-display text-xl font-bold mb-2 text-white">Crypto Tracker</h3>
+              <p class="text-slate-300 text-sm mb-4 font-medium">Cryptocurrency portfolio tracker with price alerts, market analysis, and real-time notifications.</p>
+              <div class="flex items-center gap-4 text-xs font-mono"><div class="flex items-center gap-1"><i data-lucide="bell" class="w-3.5 h-3.5 text-yellow-400 brightness-125"></i><span class="text-yellow-400 font-semibold">Smart Alerts</span></div></div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SKILLS ==================== -->
+<section id="skills" class="relative py-32 px-4">
+  <div class="glow-orb w-80 h-80 bg-primary/15 bottom-20 left-10"></div>
+  
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="section-reveal mb-16" data-section="skills-header">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-8 h-[1px] bg-gradient-to-r from-primary to-transparent"></div>
+        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold">Skills & Tech Stack</span>
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight text-white">
+        Tools I use to<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">build products</span>
+      </h2>
+    </div>
+
+    <div class="section-reveal" data-section="skills-grid">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="glass-card p-5 text-center group hover:border-primary/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-orange-500/15 border border-orange-500/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <span class="text-xl font-bold text-orange-400">H5</span>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">HTML</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-blue-400/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-blue-500/15 border border-blue-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <span class="text-xl font-bold text-blue-400">C3</span>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">CSS</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-yellow-400/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-yellow-500/15 border border-yellow-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <span class="text-xl font-bold text-yellow-400">JS</span>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">JavaScript</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-cyan-400/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <span class="text-xl font-bold text-cyan-400">Re</span>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">React</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-green-500/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <span class="text-xl font-bold text-green-500">No</span>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">Node.js</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-primary/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="trending-up" class="w-5 h-5 text-primary brightness-125"></i>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">Trading</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-purple-400/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/15 border border-purple-400/30 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="file-code" class="w-5 h-5 text-purple-400 brightness-125"></i>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">Pine Script</div>
+        </div>
+        <div class="glass-card p-5 text-center group hover:border-accent/40 transition-all duration-300 cursor-default">
+          <div class="w-10 h-10 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="wind" class="w-5 h-5 text-accent brightness-125"></i>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">Tailwind</div>
         </div>
       </div>
     </div>
@@ -354,516 +548,164 @@ body { background: #060609; color: #fff; font-family: 'Inter', sans-serif; overf
 
 <!-- ==================== CONTACT ==================== -->
 <section id="contact" class="relative min-h-screen flex items-center justify-center py-32 px-4">
-  <div class="glow-orb w-96 h-96 bg-primary/10 bottom-0 left-1/2 -translate-x-1/2"></div>
-  <div class="glow-orb w-64 h-64 bg-accent/10 top-20 right-20"></div>
+  <div class="glow-orb w-96 h-96 bg-primary/15 bottom-0 left-1/2 -translate-x-1/2"></div>
+  <div class="glow-orb w-64 h-64 bg-accent/15 top-20 right-20"></div>
   
   <div class="max-w-3xl mx-auto text-center relative z-10">
     <div class="section-reveal" data-section="contact">
       <div class="flex items-center justify-center gap-3 mb-8">
         <div class="w-8 h-[1px] bg-gradient-to-r from-transparent to-primary"></div>
-        <span class="font-mono text-xs tracking-widest uppercase text-primary/70">Get In Touch</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-primary font-semibold">Get In Touch</span>
         <div class="w-8 h-[1px] bg-gradient-to-l from-transparent to-primary"></div>
       </div>
       
-      <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
+      <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
         Let's build<br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">something extraordinary</span>
       </h2>
       
-      <p class="text-white/40 text-base sm:text-lg mb-12 max-w-xl mx-auto leading-relaxed">
-        Whether you need a custom trading indicator, a full-stack web application, or want to collaborate on the next big thing in fintech — I'm ready.
+      <p class="text-slate-300 text-base sm:text-lg mb-12 max-w-xl mx-auto leading-relaxed font-medium">
+        Whether you need a custom trading indicator, a full-stack web application, or want to collaborate — I'm ready.
       </p>
       
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="https://github.com/Bhasithaheshan" target="_blank" class="magnetic-btn group" data-magnetic>
-          <div class="btn-glow"></div>
-          <div class="btn-bg"></div>
-          <span class="flex items-center gap-2">
-            <i data-lucide="github" class="w-5 h-5"></i>
-            GitHub
-          </span>
-        </a>
-        
-        <a href="https://wa.me/94703187763" target="_blank" class="magnetic-btn group" data-magnetic>
-          <div class="btn-glow"></div>
-          <div class="btn-bg"></div>
-          <span class="flex items-center gap-2">
-            <i data-lucide="message-circle" class="w-5 h-5"></i>
-            WhatsApp
-          </span>
-        </a>
-        
-        <a href="mailto:bhasithaheshan@gmail.com" class="magnetic-btn group" data-magnetic>
-          <div class="btn-glow"></div>
-          <div class="btn-bg"></div>
-          <span class="flex items-center gap-2">
-            <i data-lucide="mail" class="w-5 h-5"></i>
-            Email
-          </span>
-        </a>
+        <a href="https://github.com/Bhasithaheshan" target="_blank" class="magnetic-btn group" data-magnetic><div class="btn-glow"></div><div class="btn-bg"></div><span class="flex items-center gap-2"><i data-lucide="github" class="w-5 h-5"></i> GitHub</span></a>
+        <a href="https://wa.me/94703187763" target="_blank" class="magnetic-btn group" data-magnetic><div class="btn-glow"></div><div class="btn-bg"></div><span class="flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp</span></a>
+        <a href="https://t.me/bhasithaheshan" target="_blank" class="magnetic-btn group" data-magnetic><div class="btn-glow"></div><div class="btn-bg"></div><span class="flex items-center gap-2"><i data-lucide="send" class="w-5 h-5"></i> Telegram</span></a>
       </div>
       
-      <div class="mt-16 pt-8">
-        <div class="footer-line mb-8"></div>
-        <p class="text-white/20 text-xs font-mono tracking-wider">
-          © 2024 Bhasitha Heshan — Crafted with precision
-        </p>
-      </div>
+      <div class="mt-16 pt-8"><div class="footer-line mb-8"></div><p class="text-slate-500 text-xs font-mono tracking-wider font-medium">© 2024 Bhasitha Heshan — Crafted with precision</p></div>
     </div>
   </div>
 </section>
 
 <script>
-// ==================== INIT LUCIDE ====================
 document.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
 
-// ==================== LOADER ====================
 (function() {
   const loader = document.getElementById('loader');
   const loaderPercent = document.getElementById('loaderPercent');
   const loaderBarFill = document.getElementById('loaderBarFill');
-  let progress = 0;
-  const target = 100;
   const duration = 2500;
   const startTime = performance.now();
   
   function animateLoader(currentTime) {
     const elapsed = currentTime - startTime;
     const easeProgress = 1 - Math.pow(1 - Math.min(elapsed / duration, 1), 3);
-    progress = Math.round(easeProgress * target);
+    const progress = Math.round(easeProgress * 100);
     loaderPercent.textContent = progress;
     loaderBarFill.style.width = progress + '%';
     
-    if (progress < target) {
-      requestAnimationFrame(animateLoader);
-    } else {
+    if (progress < 100) requestAnimationFrame(animateLoader);
+    else {
       setTimeout(() => {
-        const tl = gsap.timeline();
-        tl.to(loaderPercent, { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in' })
+        gsap.timeline()
+          .to(loaderPercent, { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in' })
           .to(loaderBarFill, { opacity: 0, duration: 0.3 }, '-=0.2')
           .to(loader.querySelector('.loader-subtitle'), { opacity: 0, duration: 0.3 }, '-=0.2')
-          .to(loader, { 
-            opacity: 0, 
-            duration: 0.8, 
-            ease: 'power4.inOut',
-            onComplete: () => {
-              loader.style.display = 'none';
-              initSite();
-            }
-          });
+          .to(loader, { opacity: 0, duration: 0.8, ease: 'power4.inOut', onComplete: () => { loader.style.display = 'none'; initSite(); } });
       }, 400);
     }
   }
-  
   requestAnimationFrame(animateLoader);
 })();
 
-// ==================== MAIN INIT ====================
 function initSite() {
-  // Lenis Setup
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    smoothTouch: false,
-    touchMultiplier: 2,
-  });
-  
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
+  const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
-  
-  // Connect Lenis to GSAP ScrollTrigger
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => { lenis.raf(time * 1000); });
   gsap.ticker.lagSmoothing(0);
-  
-  // ==================== CUSTOM CURSOR ====================
-  const cursor = document.getElementById('cursor');
-  const cursorDot = document.getElementById('cursorDot');
-  let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-  let cursorX = mouseX, cursorY = mouseY;
-  
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-  
-  function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.15;
-    cursorY += (mouseY - cursorY) * 0.15;
-    cursor.style.left = cursorX - 10 + 'px';
-    cursor.style.top = cursorY - 10 + 'px';
-    cursorDot.style.left = mouseX - 2.5 + 'px';
-    cursorDot.style.top = mouseY - 2.5 + 'px';
-    requestAnimationFrame(animateCursor);
-  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Cursor
+  const cursor = document.getElementById('cursor'), cursorDot = document.getElementById('cursorDot');
+  let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+  document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+  function animateCursor() { cursorX += (mouseX - cursorX) * 0.15; cursorY += (mouseY - cursorY) * 0.15; cursor.style.left = cursorX - 10 + 'px'; cursor.style.top = cursorY - 10 + 'px'; cursorDot.style.left = mouseX - 2.5 + 'px'; cursorDot.style.top = mouseY - 2.5 + 'px'; requestAnimationFrame(animateCursor); }
   animateCursor();
-  
-  // Cursor hover effects
-  const interactiveEls = document.querySelectorAll('a, button, .project-card-inner, .magnetic-btn, .skill-tag');
-  interactiveEls.forEach(el => {
+  document.querySelectorAll('a, button, .project-card-inner, .magnetic-btn, .skill-tag, .glass-card').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('glow'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('glow'));
   });
-  
-  // ==================== PARTICLE SYSTEM ====================
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  const particleCount = window.innerWidth < 768 ? 40 : 80;
-  
-  function resizeCanvas() {
-    canvas.width = canvas.parentElement.offsetWidth;
-    canvas.height = canvas.parentElement.offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-  
-  class Particle {
-    constructor() {
-      this.reset();
-    }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.3;
-      this.speedY = (Math.random() - 0.5) * 0.3;
-      this.opacity = Math.random() * 0.4 + 0.1;
-      this.hue = Math.random() > 0.5 ? 255 : 180;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${this.hue === 255 ? '108,92,231' : '0,245,212'}, ${this.opacity})`;
-      ctx.fill();
-    }
-  }
-  
-  for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-  
-  function connectParticles() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(108,92,231,${0.06 * (1 - dist / 150)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-  }
-  
-  let heroMouseX = 0, heroMouseY = 0;
-  document.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    heroMouseX = e.clientX - rect.left;
-    heroMouseY = e.clientY - rect.top;
-  });
-  
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    particles.forEach(p => {
-      const dx = heroMouseX - p.x;
-      const dy = heroMouseY - p.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 200) {
-        p.x -= dx * 0.005;
-        p.y -= dy * 0.005;
-      }
-      p.update();
-      p.draw();
-    });
-    
-    connectParticles();
-    requestAnimationFrame(animateParticles);
-  }
+
+  // Particles
+  const canvas = document.getElementById('particles-canvas'), ctx = canvas.getContext('2d');
+  let particles = [], pCount = window.innerWidth < 768 ? 30 : 60;
+  function resizeCanvas() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; }
+  resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+  class P { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.s = Math.random() * 1.5 + 0.5; this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3; } update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2); ctx.fillStyle = 'rgba(108,92,231,0.4)'; ctx.fill(); } }
+  for(let i=0; i<pCount; i++) particles.push(new P());
+  function animateParticles() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
   animateParticles();
-  
-  // ==================== HERO CHARACTER ANIMATION ====================
-  const charInners = document.querySelectorAll('.char-inner');
+
+  // HERO ANIMATIONS
   const heroTL = gsap.timeline({ delay: 0.2 });
-  
-  charInners.forEach((char, i) => {
-    heroTL.fromTo(char, 
-      { y: 100, opacity: 0, rotateX: -90, filter: 'blur(10px)' },
-      { 
-        y: 0, opacity: 1, rotateX: 0, filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power3.out',
-      },
-      i * 0.06
-    );
-  });
-  
-  // Glow pulse on hero title
-  heroTL.to('#heroTitle', {
-    textShadow: '0 0 40px rgba(108,92,231,0.3), 0 0 80px rgba(0,245,212,0.15)',
-    duration: 1.5,
-    ease: 'sine.inOut',
-    yoyo: true,
-    repeat: -1
-  }, '-=0.3');
-  
-  // ==================== TYPING EFFECT ====================
+  heroTL.to('[data-anim="left-item"]', { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' });
+  heroTL.to('.hero-img', { opacity: 1, scale: 1, duration: 1.5, ease: 'power2.out', delay: -0.5 });
+
+  // Typing Effect
   const roles = ['Full-stack Developer', 'Algorithmic Trader', 'Pine Script Expert'];
-  const typingEl = document.getElementById('typingText');
-  let roleIndex = 0, charIndex = 0, isDeleting = false;
-  
+  const typingEl = document.getElementById('typingText'); let roleIndex = 0, charIndex = 0, isDeleting = false;
   function typeEffect() {
-    const currentRole = roles[roleIndex];
-    
-    if (!isDeleting) {
-      typingEl.textContent = currentRole.substring(0, charIndex + 1);
-      charIndex++;
-      if (charIndex === currentRole.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, 2000);
-        return;
-      }
-      setTimeout(typeEffect, 80);
-    } else {
-      typingEl.textContent = currentRole.substring(0, charIndex - 1);
-      charIndex--;
-      if (charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        setTimeout(typeEffect, 500);
-        return;
-      }
-      setTimeout(typeEffect, 40);
-    }
-  }
-  
-  setTimeout(typeEffect, 1500);
-  
-  // ==================== SCROLL PROGRESS BAR ====================
+    const curr = roles[roleIndex]; typingEl.textContent = isDeleting ? curr.substring(0, charIndex--) : curr.substring(0, charIndex++);
+    let delay = isDeleting ? 40 : 80;
+    if (!isDeleting && charIndex === curr.length + 1) { isDeleting = true; delay = 2000; }
+    else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; delay = 500; }
+    setTimeout(typeEffect, delay);
+  } setTimeout(typeEffect, 1800);
+
+  // Scroll Progress
   const progressBar = document.getElementById('progress-bar');
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
-  });
-  
-  // ==================== PARALLAX HERO ====================
-  const heroParallax = document.querySelector('.hero-parallax');
-  document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    if (heroParallax) {
-      gsap.to(heroParallax, { x: x * 0.5, y: y * 0.5, duration: 1, ease: 'power2.out' });
-    }
-  });
-  
-  // ==================== SECTION REVEALS ====================
-  gsap.registerPlugin(ScrollTrigger);
-  
-  document.querySelectorAll('.section-reveal').forEach(section => {
-    gsap.fromTo(section,
-      { opacity: 0, y: 60, scale: 0.97 },
-      {
-        opacity: 1, y: 0, scale: 1,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 85%',
-          end: 'top 30%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
-  });
-  
-  // ==================== ANIMATED STATS ====================
-  const statNumbers = document.querySelectorAll('.stat-number');
-  statNumbers.forEach(stat => {
-    const target = parseInt(stat.dataset.target);
-    const suffix = target === 12000 ? '+' : target === 57 ? '%' : target === 50 ? '+' : '+';
-    
-    ScrollTrigger.create({
-      trigger: stat,
-      start: 'top 85%',
-      onEnter: () => {
-        gsap.to({ val: 0 }, {
-          val: target,
-          duration: 2,
-          ease: 'power2.out',
-          onUpdate: function() {
-            const val = Math.round(this.targets()[0].val);
-            stat.textContent = val >= 1000 ? val.toLocaleString() + suffix : val + suffix;
-          }
-        });
-      },
-      once: true
-    });
-  });
-  
-  // ==================== 3D TILT EFFECT ====================
-  document.querySelectorAll('.project-card').forEach(card => {
-    const inner = card.querySelector('.project-card-inner');
-    const reflection = card.querySelector('.light-reflection');
-    
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-      
-      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-      
-      if (reflection) {
-        const reflectionX = (x / rect.width) * 100;
-        const reflectionY = (y / rect.height) * 100;
-        reflection.style.background = `radial-gradient(circle at ${reflectionX}% ${reflectionY}%, rgba(108,92,231,0.15) 0%, transparent 60%)`;
-      }
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale(1)';
-      card.style.transition = 'transform 0.5s ease-out';
-    });
-    
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'none';
-    });
-  });
-  
-  // ==================== MAGNETIC BUTTONS ====================
-  document.querySelectorAll('[data-magnetic]').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
-    });
-    
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translate(0, 0)';
-      btn.style.transition = 'transform 0.4s ease-out';
-    });
-    
-    btn.addEventListener('mouseenter', () => {
-      btn.style.transition = 'none';
-    });
-  });
-  
-  // ==================== HERO PARALLAX ON SCROLL ====================
-  gsap.to('#hero .hero-parallax', {
-    y: -150,
-    opacity: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1
-    }
-  });
-  
-  // ==================== NAV VISIBILITY ====================
+  window.addEventListener('scroll', () => { progressBar.style.width = ((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100) + '%'; });
+
+  // Nav Visibility
   const mainNav = document.getElementById('mainNav');
-  ScrollTrigger.create({
-    trigger: '#about',
-    start: 'top 80%',
-    onEnter: () => gsap.to(mainNav, { opacity: 1, duration: 0.5 }),
-    onLeaveBack: () => gsap.to(mainNav, { opacity: 0, duration: 0.5 }),
+  ScrollTrigger.create({ trigger: '#education', start: 'top 70%', onEnter: () => gsap.to(mainNav, { opacity: 1, duration: 0.5 }), onLeaveBack: () => gsap.to(mainNav, { opacity: 0, duration: 0.5 }) });
+
+  // Section Reveals
+  document.querySelectorAll('.section-reveal').forEach(sec => gsap.fromTo(sec, { opacity: 0, y: 60, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: sec, start: 'top 85%', toggleActions: 'play none none none' } }));
+
+  // 3D Tilt Cards
+  document.querySelectorAll('.project-card').forEach(card => {
+    const inner = card.querySelector('.project-card-inner'), ref = card.querySelector('.light-reflection');
+    card.addEventListener('mousemove', e => { const r = card.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, cx = r.width/2, cy = r.height/2; card.style.transform = `perspective(1200px) rotateX(${((y-cy)/cy)*-8}deg) rotateY(${((x-cx)/cx)*8}deg) scale(1.03)`; if(ref) ref.style.background = `radial-gradient(circle at ${x/r.width*100}% ${y/r.height*100}%, rgba(108,92,231,0.25) 0%, transparent 60%)`; });
+    card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale(1)'; card.style.transition = 'transform 0.5s ease-out'; });
+    card.addEventListener('mouseenter', () => card.style.transition = 'none');
   });
-  
-  // ==================== SKILL TAG HOVER RIPPLE ====================
-  document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseenter', () => {
-      gsap.fromTo(tag, { scale: 0.95 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
-    });
-  });
-  
-  // ==================== GLOW ORB ANIMATIONS ====================
-  document.querySelectorAll('.glow-orb').forEach((orb, i) => {
-    gsap.to(orb, {
-      x: '+=30',
-      y: '+=20',
-      duration: 4 + i * 2,
-      ease: 'sine.inOut',
-      yoyo: true,
-      repeat: -1
-    });
-  });
-  
-  // ==================== PROJECT STAGGER ====================
-  ScrollTrigger.create({
-    trigger: '#projectGrid',
-    start: 'top 80%',
-    onEnter: () => {
-      gsap.fromTo('.project-card-wrap', 
-        { opacity: 0, y: 80, scale: 0.9 },
-        { 
-          opacity: 1, y: 0, scale: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power3.out'
-        }
-      );
-    }
-  });
-  
-  // ==================== SMOOTH SCROLL FOR NAV LINKS ====================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        lenis.scrollTo(target, { offset: 0 });
+
+  // Magnetic Buttons
+  document.querySelectorAll('[data-magnetic]').forEach(btn => { btn.addEventListener('mousemove', e => { const r = btn.getBoundingClientRect(); btn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*0.25}px, ${(e.clientY-r.top-r.height/2)*0.25}px)`; }); btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; btn.style.transition = 'transform 0.4s ease-out'; }); btn.addEventListener('mouseenter', () => btn.style.transition = 'none'); });
+
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if(t) lenis.scrollTo(t, { offset: 0 }); }); });
+
+  // Education Accordion
+  function setupAccordion(btnId, iconId, contentId) {
+    const btn = document.getElementById(btnId), icon = document.getElementById(iconId), content = document.getElementById(contentId);
+    let isOpen = false;
+    btn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        content.style.display = 'block';
+        content.style.height = '0';
+        const targetH = content.scrollHeight + 'px';
+        gsap.to(content, { height: targetH, duration: 0.6, ease: 'power3.out', onComplete: () => { content.style.height = 'auto'; } });
+        gsap.to(icon, { rotation: 180, duration: 0.3 });
+      } else {
+        gsap.to(content, { height: 0, duration: 0.5, ease: 'power3.in', onComplete: () => { content.style.display = 'none'; } });
+        gsap.to(icon, { rotation: 0, duration: 0.3 });
       }
     });
-  });
-  
-  // ==================== KEYBOARD NAVIGATION ====================
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab') {
-      document.body.style.cursor = 'auto';
-      cursor.style.display = 'none';
-      cursorDot.style.display = 'none';
-    }
-  });
+  }
+  setupAccordion('olToggleBtn', 'olToggleIcon', 'olResults');
+  setupAccordion('alToggleBtn', 'alToggleIcon', 'alResults');
 }
 
-// ==================== FLOAT ANIMATIONS ====================
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-  @keyframes float1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -20px) scale(1.1); }
-    66% { transform: translate(-20px, 30px) scale(0.9); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(-25px, 25px) scale(1.05); }
-    66% { transform: translate(20px, -15px) scale(0.95); }
-  }
-`;
-document.head.appendChild(styleSheet);
+if (window.matchMedia("(min-width: 768px)").matches) {
+  gsap.set('.hero-img', { scale: 1.15 });
+}
 </script>
 </body>
 </html>
