@@ -1,10 +1,5 @@
 
 Claude finished the response
-1783755348967_image.png
-Machan site eka hodatama pennawa! Navbar eka floating pill style eka, hero eka, buttons okkoma clean ekak.
-
-Thawat improve karanna dewal thiyenawa — mokak karanna ona?
-
 methana BH widhata wenas karanna  eka wela ne
 
 Hari machan! Navbar eke logo eka "BH" text ekak wage pennawa — image eka load wela naa. Fix karannam!
@@ -110,8 +105,59 @@ Dan upload karala bhasithaheshan.github.io/Portfolio/ open karanna — clean pre
 
 Portfolio
 Code · HTML 
+1783783587118_image.png
+dan wedi
 
-Want to be notified when Claude responds?
+Machan issue eka clear — preloader eka full screen cover wela naa, body content directly pennawa. visibility:hidden fix eka work kara naa GitHub Pages eke.
+
+Real issue: DOMContentLoaded trigger wenawa, body visible wenawa, eth preloader overlay eka z-index eken above naa properly. Complete fix karannam:
+
+
+Fix FOUC - hide body completely until preloader is visible
+Fix FOUC - hide body completely until preloader is visible
+But wait — the real problem is that the preloader div itself might not be covering content properly. Let me check and make the preloader absolutely bulletproof:
+
+
+Viewed 2 files, ran a command
+Viewed 2 files, ran a command
+Preloader z-index 9999 eka hari. Real issue eka venna puluwan — curtains eke background naa preloader level eke (preloader itself has no background, only curtain children do). Fix: preloader ekata background:#0D0D0D directly add karannam plus extra style strengthen karannam:
+
+
+Strengthen preloader to guarantee it covers all content
+Strengthen preloader to guarantee it covers all content
+Also the .loaded transition should handle the fade out correctly. Let's check:
+
+
+Ran a command, viewed a file
+Ran a command, viewed a file
+Good. Now also need to make sure body visibility doesn't interfere. Let me clean up the body CSS fix:
+
+
+Simplify body visibility - rely on preloader covering content instead
+Simplify body visibility - rely on preloader covering content instead
+Now update the inline head script to use document.documentElement opacity approach properly:
+
+
+Edited a file, read a file
+Edited a file, read a file
+Done machan! Dan mehema fix kala:
+
+Layer 1 — <style>html{opacity:0}</style> head eke inline — page eka load wena passe completely invisible (CSS parse wena gaman apply wenawa, JS wait karanne naa)
+
+Layer 2 — DOMContentLoaded → opacity:1 set wenawa (0.15s fade) — preloader eka already visible wela thiyenawa nisa
+
+Layer 3 — #preloader{background:#0D0D0D} — curtain divs render wenakanm solid black bg ekak thiyenawa — no content bleeds through
+
+Sequence:
+
+Page load → html opacity 0 (invisible)
+DOM ready → opacity 1 (0.15s) → preloader (solid black + curtains) visible
+User clicks "Enter the Portfolio" → curtains open → site reveal
+GitHub ekata index.html vidihata rename karala upload karanna — dan text bleed issue eka naa! ✅
+
+
+Portfolio
+Code · HTML 
 
 
 
@@ -174,7 +220,13 @@ Syntax highlighting has been disabled due to code size.
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<script>document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('body-ready'));</script>
+<style>html{opacity:0}</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.documentElement.style.transition = 'opacity 0.15s ease';
+  document.documentElement.style.opacity = '1';
+});
+</script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
@@ -232,7 +284,6 @@ body{
   line-height:1.65;
   font-size:16px;
   letter-spacing:-0.005em;
-  visibility:hidden; /* Prevent FOUC - JS will show body after preloader ready */
 }
 body.body-ready{
   visibility:visible;
@@ -494,6 +545,8 @@ body.dark-mode .nav-mobile-btn span{background:#fff}
   display:flex;
   align-items:center;
   justify-content:center;
+  background:#0D0D0D; /* Solid fallback so nothing shows through before curtains render */
+  transition:none;
 }
 /* Left curtain */
 .curtain-left,
