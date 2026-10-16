@@ -53,23 +53,27 @@ function tick(){const t=W[w];c+=del?-1:1;el.textContent=t.slice(0,c);let d=del?4
  setTimeout(tick,d)}
 el.textContent="";setTimeout(tick,500)})();
 /* lightbox */
-let SET={t:"",u:[]},idx=0;const lb=$("#lb");
-function show(){$("#lbimg").src=SET.u[idx];$("#lbimg").alt=SET.t;$("#cap").textContent=`${SET.t}  ${idx+1}/${SET.u.length}`}
-function openSet(t,u,i){SET={t,u};idx=i||0;show();lb.classList.add("open");document.body.style.overflow="hidden"}
+let SET={t:"",u:[],c:null},idx=0;const lb=$("#lb");
+function show(){$("#lbimg").src=SET.u[idx];$("#lbimg").alt=SET.t;$("#cap").textContent=`${(SET.c&&SET.c[idx])||SET.t}  ${idx+1}/${SET.u.length}`}
+function openSet(t,u,i,c){SET={t,u,c:c||null};idx=i||0;show();lb.classList.add("open");document.body.style.overflow="hidden"}
 function openLb(k){const p=P[+k];openSet(p.n,p.i.map(x=>`projects/${p.f}/${x}`))}
 function closeLb(){lb.classList.remove("open");document.body.style.overflow=""}
 function step(d){const n=SET.u.length;idx=(idx+d+n)%n;show()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(b)openLb(b.dataset.k);
- const g=e.target.closest("[data-gi]");if(g){const c=G[+g.dataset.gc];openSet(c.n,gUrls(c),+g.dataset.gi)}
+ const g=e.target.closest("[data-gi]");if(g){const c=G[+g.dataset.gc];openSet(c.n,[...document.querySelectorAll("#ggrid .gimg img")].map(m=>m.getAttribute("src")),+g.dataset.gi,c.t)}
  if(e.target===lb||e.target.closest("#x"))closeLb();if(e.target.closest("#prev"))step(-1);if(e.target.closest("#next"))step(1)});
 document.addEventListener("keydown",e=>{if(!lb.classList.contains("open"))return;if(e.key==="Escape")closeLb();if(e.key==="ArrowLeft")step(-1);if(e.key==="ArrowRight")step(1)});
 /* graphic design gallery */
 // ADD NEW DESIGNS: put images in projects/graphic-design/<folder>/ named 1.jpg, 2.jpg, 3.jpg ... then raise "c" (count).
 // ADD NEW CATEGORY: copy one line below and change n (name), f (folder), c (count), e (file extension).
 const G=[
- {n:"Logo Design",f:"logo-design",c:0,e:"jpg"},
- {n:"Business Card Design",f:"business-card-design",c:1,e:"jpg"}
+ {n:"Logo Design",f:"logo-design",c:1,e:"jpg",t:["TechStore.lk"]},
+ {n:"Business Card Design",f:"business-card-design",c:2,e:"jpg"}
 ];
+// t:[...] = optional business names shown under each design (same order as 1, 2, 3 ...)
+// File type is detected automatically (jpg, png, jpeg, webp), so e is only a first guess.
+const EXT=["jpg","png","jpeg","webp","JPG","PNG"];
+function fx(img){const e=img.dataset.e||"",o=[e,...EXT.filter(x=>x!==e)];let n=+(img.dataset.n||0)+1;if(n>=o.length)return;img.dataset.n=n;img.src=img.getAttribute("src").replace(/\.[A-Za-z]+$/,"."+o[n])}
 const gUrls=c=>Array.from({length:c.c},(_,i)=>`projects/graphic-design/${c.f}/${i+1}.${c.e}`);
 (function(){
   const tabs=document.querySelectorAll(".tab");if(!tabs.length)return;
@@ -77,7 +81,7 @@ const gUrls=c=>Array.from({length:c.c},(_,i)=>`projects/graphic-design/${c.f}/${
   function drawG(){
     $("#subtabs").innerHTML=G.map((c,i)=>`<button class="chipb ${i===cat?"on":""}" data-cat="${i}">${c.n}<small>${c.c}</small></button>`).join("");
     const c=G[cat],u=gUrls(c);
-    $("#ggrid").innerHTML=u.length?u.map((src,i)=>`<button class="gimg" data-gc="${cat}" data-gi="${i}" aria-label="${c.n} ${i+1}"><img src="${src}" alt="${c.n} ${i+1}" loading="lazy"></button>`).join(""):`<div class="empty"><b>${c.n}</b>New designs are coming soon.</div>`;
+    $("#ggrid").innerHTML=u.length?u.map((src,i)=>`<figure class="gfig"><button class="gimg" data-gc="${cat}" data-gi="${i}" aria-label="${(c.t&&c.t[i])||c.n+" "+(i+1)}"><img src="${src}" data-e="${c.e}" alt="${(c.t&&c.t[i])||c.n+" "+(i+1)}" loading="lazy" onerror="fx(this)"></button>${c.t&&c.t[i]?`<figcaption>${c.t[i]}</figcaption>`:""}</figure>`).join(""):`<div class="empty"><b>${c.n}</b>New designs are coming soon.</div>`;
   }
   function setTab(t){
     tabs.forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});

@@ -181,3 +181,7 @@ body{animation:pg .5s ease both}@keyframes pg{from{opacity:0;transform:translate
 .empty b{display:block;color:var(--text);font:800 1.15rem "Bricolage Grotesque",sans-serif;margin-bottom:6px}
 @media(max-width:760px){.ggrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.ggrid{grid-template-columns:1fr}}
+
+.gfig{margin:0;display:flex;flex-direction:column;gap:12px}
+.gfig .gimg{width:100%}
+.gfig figcaption{text-align:center;font:800 1.05rem "Bricolage Grotesque",sans-serif;letter-spacing:-.01em;color:var(--text)}
