@@ -53,14 +53,42 @@ function tick(){const t=W[w];c+=del?-1:1;el.textContent=t.slice(0,c);let d=del?4
  setTimeout(tick,d)}
 el.textContent="";setTimeout(tick,500)})();
 /* lightbox */
-let cur=0,idx=0;const lb=$("#lb");
-function show(){const p=P[cur];$("#lbimg").src=`projects/${p.f}/${p.i[idx]}`;$("#lbimg").alt=p.n;$("#cap").textContent=`${p.n}  ${idx+1}/${p.i.length}`}
-function openLb(k){cur=+k;idx=0;show();lb.classList.add("open");document.body.style.overflow="hidden"}
+let SET={t:"",u:[]},idx=0;const lb=$("#lb");
+function show(){$("#lbimg").src=SET.u[idx];$("#lbimg").alt=SET.t;$("#cap").textContent=`${SET.t}  ${idx+1}/${SET.u.length}`}
+function openSet(t,u,i){SET={t,u};idx=i||0;show();lb.classList.add("open");document.body.style.overflow="hidden"}
+function openLb(k){const p=P[+k];openSet(p.n,p.i.map(x=>`projects/${p.f}/${x}`))}
 function closeLb(){lb.classList.remove("open");document.body.style.overflow=""}
-function step(d){const n=P[cur].i.length;idx=(idx+d+n)%n;show()}
+function step(d){const n=SET.u.length;idx=(idx+d+n)%n;show()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(b)openLb(b.dataset.k);
+ const g=e.target.closest("[data-gi]");if(g){const c=G[+g.dataset.gc];openSet(c.n,gUrls(c),+g.dataset.gi)}
  if(e.target===lb||e.target.closest("#x"))closeLb();if(e.target.closest("#prev"))step(-1);if(e.target.closest("#next"))step(1)});
 document.addEventListener("keydown",e=>{if(!lb.classList.contains("open"))return;if(e.key==="Escape")closeLb();if(e.key==="ArrowLeft")step(-1);if(e.key==="ArrowRight")step(1)});
+/* graphic design gallery */
+// ADD NEW DESIGNS: put images in projects/graphic-design/<folder>/ named 1.jpg, 2.jpg, 3.jpg ... then raise "c" (count).
+// ADD NEW CATEGORY: copy one line below and change n (name), f (folder), c (count), e (file extension).
+const G=[
+ {n:"Logo Design",f:"logo-design",c:0,e:"jpg"},
+ {n:"Business Card Design",f:"business-card-design",c:1,e:"jpg"}
+];
+const gUrls=c=>Array.from({length:c.c},(_,i)=>`projects/graphic-design/${c.f}/${i+1}.${c.e}`);
+(function(){
+  const tabs=document.querySelectorAll(".tab");if(!tabs.length)return;
+  let cat=Math.max(0,G.findIndex(c=>c.c>0));
+  function drawG(){
+    $("#subtabs").innerHTML=G.map((c,i)=>`<button class="chipb ${i===cat?"on":""}" data-cat="${i}">${c.n}<small>${c.c}</small></button>`).join("");
+    const c=G[cat],u=gUrls(c);
+    $("#ggrid").innerHTML=u.length?u.map((src,i)=>`<button class="gimg" data-gc="${cat}" data-gi="${i}" aria-label="${c.n} ${i+1}"><img src="${src}" alt="${c.n} ${i+1}" loading="lazy"></button>`).join(""):`<div class="empty"><b>${c.n}</b>New designs are coming soon.</div>`;
+  }
+  function setTab(t){
+    tabs.forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});
+    $("#pw").hidden=t!=="web";$("#pg").hidden=t!=="graphic";
+    try{history.replaceState(null,"",t==="graphic"?"#graphic":location.pathname)}catch(e){}
+  }
+  tabs.forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
+  $("#subtabs").addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(b){cat=+b.dataset.cat;drawG()}});
+  drawG();setTab(location.hash==="#graphic"?"graphic":"web");
+  addEventListener("hashchange",()=>setTab(location.hash==="#graphic"?"graphic":"web"));
+})();
 /* nav */
 $("#menu").onclick=()=>$("#links").classList.toggle("open");
 document.querySelectorAll("#links a").forEach(a=>a.onclick=()=>$("#links").classList.remove("open"));
