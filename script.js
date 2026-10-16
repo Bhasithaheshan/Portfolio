@@ -1,3 +1,25 @@
+/* ---- intro animation (BHASITHA) ---- */
+(function(){
+  const root=document.documentElement,ov=document.getElementById("intro");
+  if(!ov||!root.classList.contains("intro-on"))return;
+  const W="BHASITHA",N=12;
+  try{sessionStorage.setItem("intro","1")}catch(e){}
+  ov.innerHTML='<div class="cols">'+Array.from({length:N},(_,c)=>`<i style="left:${c*100/N}%;width:calc(${100/N}% + 1px)"></i>`).join("")+'</div><div class="iw">'+[...W].map(c=>`<span><b>${c}</b></span>`).join("")+'</div><span class="skip">Click to skip</span>';
+  root.classList.remove("intro-on");root.classList.add("intro-run");
+  const L=[...ov.querySelectorAll(".iw b")],C=[...ov.querySelectorAll(".cols i")];
+  L.forEach((b,i)=>b.animate([{transform:"translateY(118%)"},{transform:"translateY(0)"}],{duration:800,delay:350+i*90,easing:"cubic-bezier(.2,.8,.2,1)",fill:"both"}));
+  let done=false,t;
+  function out(){
+    if(done)return;done=true;clearTimeout(t);
+    const sk=ov.querySelector(".skip");if(sk)sk.animate([{opacity:1},{opacity:0}],{duration:250,fill:"both"});
+    L.forEach((b,i)=>b.getAnimations().forEach(a=>a.finish()));
+    L.forEach((b,i)=>b.animate([{transform:"translateY(0)"},{transform:"translateY(-118%)"}],{duration:600,delay:i*45,easing:"cubic-bezier(.7,0,.8,.2)",fill:"both"}));
+    C.forEach((c,i)=>c.animate([{transform:"translateY(0)"},{transform:"translateY(-101%)"}],{duration:800,delay:380+i*55,easing:"cubic-bezier(.7,0,.2,1)",fill:"both"}));
+    setTimeout(()=>{ov.remove();root.classList.remove("intro-run")},380+N*55+850);
+  }
+  t=setTimeout(out,350+7*90+800+750);
+  ov.addEventListener("click",out);
+})();
 const P=[
  {f:"traderJournal",n:"Trader Journal",d:"A professional trading journal web app with a TradingView-inspired dark glassmorphism UI. It tracks the full trade lifecycle, auto-calculates win rate and risk-reward, and shows a live Chart.js analytics dashboard. Fully client-side, so your data stays private in your browser.",t:["HTML","CSS","JavaScript","Chart.js"],i:["1.png"],u:"https://bhasithaheshan.github.io/TradingJournal/"},
  {f:"tradexpertz",n:"TradeXpertz",d:"A modern trading education platform with structured learning modules for Technical Analysis, Smart Money Concepts and Market Structure. A fast, responsive dark UI built on a custom Blogger engine.",t:["HTML5","CSS","JavaScript","Blogger"],i:["1.png"],u:"https://tradexpertzclub.blogspot.com/#home"},

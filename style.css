@@ -149,3 +149,14 @@ body{animation:pg .5s ease both}@keyframes pg{from{opacity:0;transform:translate
 .sbtn .arr{margin-left:auto;font-style:normal;color:var(--mut);transition:.25s}
 .sbtn:hover .arr{color:var(--text);transform:translate(2px,-2px)}
 @media(max-width:480px){.soc{grid-template-columns:1fr}}
+
+/* ===== intro animation ===== */
+#intro{display:none;position:fixed;inset:0;z-index:1000;cursor:pointer}
+.intro-on body::before{content:"";position:fixed;inset:0;background:#002547;z-index:999}
+.intro-on body,.intro-run body{overflow:hidden}
+.intro-run #intro{display:block}
+#intro .cols i{position:absolute;top:0;bottom:0;background:#002547;will-change:transform}
+#intro .iw{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font:800 clamp(2rem,9.5vw,6.4rem)/1.2 "Bricolage Grotesque",sans-serif;letter-spacing:.07em;color:#fff;pointer-events:none;padding-left:.07em}
+#intro .iw span{display:block;overflow:hidden;padding:0 .015em}
+#intro .iw b{display:block;font-weight:800;transform:translateY(118%);will-change:transform}
+#intro .skip{position:absolute;right:22px;bottom:20px;font:500 .72rem "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);pointer-events:none}
