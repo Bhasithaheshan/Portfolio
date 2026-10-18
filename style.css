@@ -136,7 +136,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .cta-band h2{margin:0;font-size:clamp(1.25rem,2.8vw,1.8rem)}
 .cta-band .btn{background:#fff;border-color:#fff;color:#111}.cta-band .btn:hover{border-color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.35)}
 .more{display:flex;justify-content:center;margin-top:30px}
-body{animation:pg .5s ease both}@keyframes pg{from{opacity:0;transform:translateY(8px)}}
+body{animation:pg .5s ease both}@keyframes pg{from{opacity:0}}
 
 .soc{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px}
 .sbtn{display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;border:1px solid var(--line);border-radius:16px;background:#151515;transition:.25s;min-width:0}
@@ -156,7 +156,7 @@ body{animation:pg .5s ease both}@keyframes pg{from{opacity:0;transform:translate
 .intro-on body,.intro-run body{overflow:hidden}
 .intro-run #intro{display:block}
 #intro .cols i{position:absolute;top:0;bottom:0;background:#002547;will-change:transform}
-#intro .iw{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font:800 clamp(2rem,9.5vw,6.4rem)/1.2 "Bricolage Grotesque",sans-serif;letter-spacing:.07em;color:#fff;pointer-events:none;padding-left:.07em}
+#intro .iw{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font:800 clamp(2rem,11.5vw,6.4rem)/1.2 "Bricolage Grotesque",sans-serif;letter-spacing:.07em;color:#fff;pointer-events:none;padding-left:.07em}
 #intro .iw span{display:block;overflow:hidden;padding:0 .015em}
 #intro .iw b{display:block;font-weight:800;transform:translateY(118%);will-change:transform}
 #intro .skip{position:absolute;right:22px;bottom:20px;font:500 .72rem "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);pointer-events:none}
